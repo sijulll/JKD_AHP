@@ -18,24 +18,70 @@ class userSeeder extends Seeder
 
             DB::table('users')->truncate();
             User::create([
-                'username' => 'admin Dua',
+                'id' => '1',
+                'username' => 'Admin',
                 'role_id' => '1',
-                'email' => 'admin2@admin.com',
+                'email' => 'admin@admin.com',
                 'password' => Hash::make('password'),
                 ]);
+                DB::table('users')->truncate();
+                User::create([
+                    'id' => '9',
+                    'username' => 'Admin',
+                    'role_id' => '1',
+                    'email' => 'admin2@admin.com',
+                    'password' => Hash::make('password'),
+                    ]);
 
         User::create([
-            'username' => 'penilai01',
+            'id' => '2',
+            'username' => 'Penilai',
             'role_id' => '2',
             'email' => 'penilai@penilai.com',
             'password' => Hash::make('password'),
             ]);
 
          User::create([
-            'username' => 'Dosen Ku',
-            'role_id' => '3',
-            'email' => 'dosen@dosen.com',
+            'id' => '3',
+            'username' => 'Penilai',
+            'role_id' => '2',
+            'email' => 'penilai2@penilai.com',
             'password' => Hash::make('password'),
             ]);
+            User::create([
+                'id' => '4',
+                'username' => 'Dosen A',
+                'role_id' => '3',
+                'email' => 'dosen@dosen.com',
+                'password' => Hash::make('password'),
+                ]);
+                User::create([
+                    'id' => '5',
+                    'username' => 'Dosen B',
+                    'role_id' => '3',
+                    'email' => 'dosen2@dosen.com',
+                    'password' => Hash::make('password'),
+                    ]);
+                    User::create([
+                        'id' => '6',
+                        'username' => 'Dosen C',
+                        'role_id' => '3',
+                        'email' => 'dosen3@dosen.com',
+                        'password' => Hash::make('password'),
+                        ]);
+                        User::create([
+                            'id' => '7',
+                            'username' => 'Dosen D',
+                            'role_id' => '3',
+                            'email' => 'dosen4@dosen.com',
+                            'password' => Hash::make('password'),
+                            ]);
+                            User::create([
+                                'id' => '8',
+                                'username' => 'Dadi Mulyadi M.Kom',
+                                'role_id' => '3',
+                                'email' => 'dadi@dosen.com',
+                                'password' => Hash::make('dadi'),
+                                ]);
     }
 }

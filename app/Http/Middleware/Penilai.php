@@ -18,10 +18,15 @@ class Penilai
         if(!Auth::check()){
             return redirect()->route('login');
         }
+        if(!Auth::user()->role_id == 1){
+            return redirect()->route('admin.dashboard');
+        }
         if(!Auth::user()->role_id == 2){
             return redirect()->route('penilai.dashboard');
         }
-
+        if(!Auth::user()->role_id == 3){
+            return redirect()->route('dosen.dashboard');
+        }
         return $next($request);
     }
 }

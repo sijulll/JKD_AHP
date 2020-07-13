@@ -1,6 +1,6 @@
-@extends('layout.master_penilai')
+@extends('layout.master_dosen')
 @section('title')
-     Penilai - Jenjang Karier Dosen PNJ
+    Dosen - Jenjang Karier Dosen PNJ
 @endsection
 
 @section('head_link')
@@ -9,22 +9,21 @@
 @endsection
 
 @section('content')
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+ <!-- Content Wrapper. Contains page content -->
+ <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Dashboard Penilai</h1>
+          <h1>Welcome Back {{Auth::user()->username }}</h1>
           </div>
-          @if (session('status'))
+@if (session('status'))
 <div class="alert alert-success" role="alert">
     {{ session('status') }}
 </div>
 @endif
-Dashboard  Penilai Nih !!
-</div></div></section></div>
+        </div></div></section></div>
 @endsection
 @section('footer_link')
 <!-- Toastr -->

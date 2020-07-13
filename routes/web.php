@@ -20,6 +20,7 @@ route::post('/s','Admin\PengajuanController@s');
 Auth::routes();
 Route::get('/admindashboard' ,'UserController@adminDashboard')->name('admin.dashboard')->middleware('admin');
 Route::get('/penilaidashboard' ,'UserController@penilaiDashboard')->name('penilai.dashboard')->middleware('penilai');
+Route::get('/dosendashboard' ,'UserController@dosenDashboard')->name('dosen.dashboard')->middleware('dosen');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/aprofile','UserController@aprofile')->name('get.aprofile')->middleware('admin');
 Route::post('/aprofile','UserController@a_profileUpdate')->name('aprofile')->middleware('admin');
@@ -40,7 +41,12 @@ Route::resource('dosen', 'DosenController');
 Route::resource('pengajuan', 'PengajuanController');
 });
 
-//Grouping Admin
+//Grouping Penilai
+Route::group(['prefix'=>'penilai','namespace'=>'Penilai','middleware'=>['auth','penilai'],'as'=>'penilai.'], function(){
+Route::resource('approval', 'ApprovalController');
+});
+
+//Grouping Dosen
 Route::group(['prefix'=>'penilai','namespace'=>'Penilai','middleware'=>['auth','penilai'],'as'=>'penilai.'], function(){
 Route::resource('approval', 'ApprovalController');
 });

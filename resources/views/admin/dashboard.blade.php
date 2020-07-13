@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title')
-    Dosen - Jenjang Karier Dosen PNJ
+    Admin - Jenjang Karier Dosen PNJ
 @endsection
 
 @section('head_link')

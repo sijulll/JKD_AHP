@@ -32,6 +32,11 @@ class UserController extends Controller
         $users = User::all();
         return view('admin.dashboard')->with('users','$users');
     }
+    public function dosenDashboard()
+    {
+        $users = User::all();
+        return view('dosen.dashboard')->with('users','$users');
+    }
     public function aprofile()
     {
         return view ('a_profile',array('user' => Auth::user()));
