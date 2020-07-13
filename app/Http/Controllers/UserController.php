@@ -18,7 +18,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        //login
+        return view('auth.login');
     }
 
     public function penilaiDashboard()
@@ -26,13 +27,11 @@ class UserController extends Controller
         $users = User::all();
         return view('penilai.dashboard')->with('users','$users');
     }
-
     public function adminDashboard()
     {
         $users = User::all();
         return view('admin.dashboard')->with('users','$users');
     }
-
     public function aprofile()
     {
         return view ('a_profile',array('user' => Auth::user()));

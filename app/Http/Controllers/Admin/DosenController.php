@@ -25,6 +25,10 @@ class DosenController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function g()
+    {
+
+    }
     public function index()
     {
         //

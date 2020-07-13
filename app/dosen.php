@@ -14,5 +14,8 @@ class dosen extends Model
     {
         return $this->belongsTo('App\jabatan', 'j_id');
     }
-
+    public function pengajuanak()
+    {
+        return $this->hasMany(pengajuanak::class);
+    }
 }

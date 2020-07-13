@@ -12,4 +12,10 @@ class komponenkegiatan extends Model
     {
         return $this->belongsTo('App\jeniskegiatan','jk_id');
     }
+
+    //hasMany
+    public function pengajuanak()
+    {
+        return $this->hasMany('App\pengajuanak');
+    }
 }
