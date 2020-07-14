@@ -13,7 +13,7 @@ Dosen - Jenjang Karier Dosen PNJ
 <link rel="stylesheet" href="{{asset('plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css')}}">
 <!-- Tempusdominus Bbootstrap 4 -->
 <link rel="stylesheet" href="{{asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> --}}
 @endsection
 
 @section('content')
@@ -70,27 +70,24 @@ Dosen - Jenjang Karier Dosen PNJ
                         </div>
                         <div class="form-group">
                             <label>Jenis Kegiatan : </label>
-                            <select class="form-control select2bs4 jk_id"  name="jk_id"
-                                id="jk_id" style="width: 100%;">
+                            <select class="form-control select2bs4" name="jk_id" id="jk_id" style="width: 100%;">
                                 <option selected disabled>--- Pilih Jenis Kegiatan ---</option>
-                                @foreach ($jeniskegiatanData as $kk)
-                                <option value="{{$kk->jk_id}}">
-                                    {{$kk->nama_jk}}
+                                @foreach ($jkData as $jk => $val)
+                                <option value="{{$jk}}">
+                                    {{$val}}
                                 </option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Komponen Kegiatan : </label>
-                            <select class="form-control select2bs4 kk_id"
-                                name="kk_id" id="kk_id" style="width: 100%;">
-                                <option value="0" disabled="true" selected="true">Komponen Kegiatan</option>
+                            <select class="form-control select2bs4 " name="kk_id" id="kk_id" style="width: 100%;">
+                                <option disabled="true" selected="true">--- Komponen Kegiatan ---</option>
                             </select>
-                            {{-- {{ csrf_field() }} --}}
                         </div>
                         <div class="form-group">
-                            <label>File : </label>
-                            <input type="file" id="file" name="file" class="input-file" accept=".pdf,.docs">
+                            <label>File (Only PDF):</label>
+                            <input type="file" id="file" name="file" class="input-file" accept=".pdf">
                         </div>
 
                     </div>
@@ -139,60 +136,32 @@ Dosen - Jenjang Karier Dosen PNJ
         })
         //Money Euro
         $('[data-mask]').inputmask()
-
-//         $('#jk_id').on('change', function(e){
-//     console.log(e);
-//     var jk_id = e.target.value;
-//     $.get('/admin/pengajuan/create1?province_id=' + jk_id,function(data) {
-//       console.log(data);
-//       $('#kk_id').empty();
-//       $('#kk_id').append('<option value="0" disable="true" selected="true">=== Select Regencies ===</option>');
-
-//       $.each(data, function(index, kk_id){
-//         $('#kk_id').append('<option value="'+ kk_id.id +'">'+ kk_id.name +'</option>');
-//       })
-//     });
-//   });
-
     });
 
 </script>
-<script>
-    $(document).ready(function(){
-
-$(document).on('change','.jk_id',function(){
-    // console.log("hmm its change");
-
-    var jk_id=$(this).val();
-    // console.log(cat_id);
-    var div=$(this).parent();
-
-    var op=" ";
-
-    $.ajax({
-        type:'get',
-        url:'{!!URL::to('dd1')!!}',
-        data:{'id':jk_id},
-        success:function(data){
-            //console.log('success');
-
-            //console.log(data);
-
-            //console.log(data.length);
-            op+='<option value="0" selected disabled>chose product</option>';
-            for(var i=0;i<data.length;i++){
-            op+='<option value="'+data[i].id+'">'+data[i].productname+'</option>';
-           }
-
-           div.find('.kk_id').html(" ");
-           div.find('.kk_id').append(op);
-        },
-        error:function(){
-
-        }
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery('select[name="jk_id"]').on('change', function () {
+            var jk = jQuery(this).val();
+            if (jk) {
+                jQuery.ajax({
+                    url: 'pengajuan/getKK/' +jk,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                        jQuery('select[name="kk_id"]').empty();
+                        jQuery.each(data, function (key, value) {
+                            $('select[name="kk_id"]').append('<option value="' +
+                                key + '">' + value + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $('select[name="kk_id"]').empty();
+            }
+        });
     });
-});
-});
-
 </script>
+
 @endsection

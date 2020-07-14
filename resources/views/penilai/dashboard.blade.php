@@ -16,14 +16,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Dashboard Penilai</h1>
+          <h1>Welcome Back {{Auth::user()->username }}</h1>
           </div>
           @if (session('status'))
 <div class="alert alert-success" role="alert">
     {{ session('status') }}
 </div>
 @endif
-Dashboard  Penilai Nih !!
 </div></div></section></div>
 @endsection
 @section('footer_link')

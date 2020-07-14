@@ -13,23 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-route::get('/','UserController@index');
-route::get('/c','Admin\PengajuanController@c');
-route::post('/s','Admin\PengajuanController@s');
-
 Auth::routes();
+Route::get('/' ,'UserController@index');
 Route::get('/admindashboard' ,'UserController@adminDashboard')->name('admin.dashboard')->middleware('admin');
 Route::get('/penilaidashboard' ,'UserController@penilaiDashboard')->name('penilai.dashboard')->middleware('penilai');
 Route::get('/dosendashboard' ,'UserController@dosenDashboard')->name('dosen.dashboard')->middleware('dosen');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/aprofile','UserController@aprofile')->name('get.aprofile')->middleware('admin');
-Route::post('/aprofile','UserController@a_profileUpdate')->name('aprofile')->middleware('admin');
-Route::get('/pprofile','UserController@pprofile')->name('get.pprofile')->middleware('penilai');
-Route::post('/pprofile','UserController@p_profileUpdate')->name('aprofile')->middleware('penilai');
-Route::get('/dd1','Admin\PengajuanController@fetch');
-
-
-
+Route::get('/aprofile','UserController@aprofile')->name('get.aprofile');
+Route::post('/aprofile','UserController@a_profileUpdate')->name('aprofile');
 //Grouping Admin
 Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware'=>['auth','admin'],'as'=>'admin.'], function(){
 Route::resource('jabatan', 'JabatanController');
@@ -38,15 +29,15 @@ Route::resource('jeniskegiatan', 'JenisKegiatanController');
 Route::resource('komponenkegiatan', 'KomponenKegiatanController');
 Route::resource('role', 'RoleController');
 Route::resource('dosen', 'DosenController');
-Route::resource('pengajuan', 'PengajuanController');
 });
-
 //Grouping Penilai
 Route::group(['prefix'=>'penilai','namespace'=>'Penilai','middleware'=>['auth','penilai'],'as'=>'penilai.'], function(){
 Route::resource('approval', 'ApprovalController');
 });
-
 //Grouping Dosen
-Route::group(['prefix'=>'penilai','namespace'=>'Penilai','middleware'=>['auth','penilai'],'as'=>'penilai.'], function(){
-Route::resource('approval', 'ApprovalController');
+Route::group(['prefix'=>'dosen','namespace'=>'Dosen','middleware'=>['auth','dosen'],'as'=>'dosen.'], function(){
+Route::get('/dosen/lihatjabatan','AllDosenController@lihat_jabatan')->name('dosen.lihatjabatan');
+Route::get('/dosen/lihatkomponenkegiatan','AllDosenController@lihat_kk')->name('dosen.lihatkomponenkegiatan');
+Route::get('/dosen/pengajuan-angka-kredit','AllDosenController@view_pengajuan')->name('dosen.pengajuan');
+Route::get('/dosen/pengajuan/getKK/{id}','AllDosenController@getKK');
 });

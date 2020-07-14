@@ -32,7 +32,6 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
     </ul>
-
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
@@ -43,7 +42,7 @@
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
               <span class=" dropdown-header">Account Settings</span>
               <div class="dropdown-divider"></div>
-              <a href="{{ route('get.aprofile') }}" class="dropdown-item">
+            <a href="{{ route('get.aprofile') }}" class="dropdown-item">
                 <i class="fas fa-key mr-2"></i> Account Settings
               </a>
               <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -62,7 +61,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
+  <a href="{{route('dosen.dashboard')}}" class="brand-link">
       <img src="../../dist/img/AdminLTELogo.png"
            alt="AdminLTE Logo"
            class="brand-image img-circle elevation-3"s
@@ -87,7 +86,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <a href="{{route('dosen.dashboard')}}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -95,7 +94,7 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="../widgets.html" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Master Data
@@ -104,16 +103,22 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                <a href="{{route('admin.dosen.index')}}" class="nav-link">
+                <a href="#" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Dosen</p>
+                    <p>Data Saya</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="../layout/top-nav-sidebar.html" class="nav-link">
+                  <a href="{{route('dosen.dosen.lihatjabatan')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Pengajuan KUM</p>
+                    <p>Tabel Jabatan Fungsional</p>
                   </a>
+                </li>
+                <li class="nav-item">
+                <a href="{{route('dosen.dosen.lihatkomponenkegiatan')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Tabel Komponen Kegiatan</p>
+                    </a>
                 </li>
             </ul>
           </li>
@@ -121,15 +126,21 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cogs"></i>
               <p>
-                Settings Data
+                Pengajuan
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('admin.jeniskegiatan.index')}}" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Settings Data KUM</p>
+                  <p>Lihat data pengajuan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('dosen.dosen.pengajuan')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pengajuan Angka Kredit</p>
                 </a>
               </li>
             </ul>

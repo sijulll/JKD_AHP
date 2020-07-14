@@ -62,7 +62,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
+  <a href="{{route('admin.dashboard')}}" class="brand-link">
       <img src="../../dist/img/AdminLTELogo.png"
            alt="AdminLTE Logo"
            class="brand-image img-circle elevation-3"s
@@ -87,7 +87,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <a href="{{route('admin.dashboard')}}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -106,13 +106,7 @@
                 <li class="nav-item">
                 <a href="{{route('admin.dosen.index')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Dosen</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../layout/top-nav-sidebar.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Approval Data</p>
+                    <p>List Dosen</p>
                   </a>
                 </li>
             </ul>
@@ -142,18 +136,6 @@
                 <a href="{{route('admin.jabatan.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Settings Jabatan Fungsional</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../layout/top-nav-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Settings Document Points</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{route('admin.kriteria.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Settings Kriteria & Bobot</p>
                 </a>
               </li>
             </ul>

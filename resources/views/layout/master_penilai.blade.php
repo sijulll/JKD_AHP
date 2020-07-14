@@ -43,7 +43,7 @@
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
               <span class=" dropdown-header">Account Settings</span>
               <div class="dropdown-divider"></div>
-              <a href="{{ route('get.pprofile') }}" class="dropdown-item">
+              <a href="{{ route('get.aprofile') }}" class="dropdown-item">
                 <i class="fas fa-key mr-2"></i> Account Setting
               </a>
               <a  class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -95,23 +95,37 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="../widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-envelope"></i>
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
               <p>
-                Approval Data
+                Master Data
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{route('dosen.dosen.lihatjabatan')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Tabel Jabatan Fungsional</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                <a href="{{route('dosen.dosen.lihatkomponenkegiatan')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Tabel Komponen Kegiatan</p>
+                    </a>
+                </li>
+            </ul>
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-rocket"></i>
+              <i class="nav-icon fas fa-envelope"></i>
               <p>
-                Rekomendasi Dosen
-                <i class="fas fa-angle-left right"></i>
+                Approval Data
               </p>
             </a>
           </li>
+
          </ul>
       </nav>
       <!-- /.sidebar-menu -->

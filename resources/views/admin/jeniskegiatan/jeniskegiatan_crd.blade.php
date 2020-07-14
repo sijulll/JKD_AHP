@@ -71,7 +71,7 @@
                     <form action="{{ route('admin.jeniskegiatan.destroy', $jeniskegiatan->id) }}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
-                <a href="{{ route('jeniskegiatan.edit',$jeniskegiatan->id)}}" class="btn btn-warning show-modal" data-id="{{$jeniskegiatan->id}}" data-nama="{{$jeniskegiatan->nama_jk}}" data-deskripsi="{{$jeniskegiatan->deskripsi}}" >
+                <a href="{{ route('admin.jeniskegiatan.edit',$jeniskegiatan->id)}}" class="btn btn-warning show-modal" data-id="{{$jeniskegiatan->id}}" data-nama="{{$jeniskegiatan->nama_jk}}" data-deskripsi="{{$jeniskegiatan->deskripsi}}" >
                         Edit
                 </a>
                     <button type="submit" data-id="{{$jeniskegiatan->id}}" data-nama="{{$jeniskegiatan->nama_jk}}" data-deskripsi="{{$jeniskegiatan->deskripsi}}" class="btn btn-danger" >

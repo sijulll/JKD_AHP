@@ -40,9 +40,6 @@ class UserController extends Controller
     public function aprofile()
     {
         return view ('a_profile',array('user' => Auth::user()));
-    } public function pprofile()
-    {
-        return view ('p_profile',array('user' => Auth::user()));
     }
     // public function penilaiprofile()
     // {
@@ -118,6 +115,26 @@ class UserController extends Controller
         $user->save();
         return view ('a_profile',array('user' => Auth::user()));
     }
+    public function d_profileUpdate(Request $request)
+    {
+        // handle update user
+        $this->validate($request, [
+            'username' => ['required', 'string', 'max:25'],
+            'email' => ['required', 'string', 'email', 'max:250', 'unique:users'],
+            // 'image' => ['mimes:jpeg,jpg,png|required|max:10000'],
+            ]);
+        if($request->hasFile('img')){
+            $img = $request->file('img');
+            $filename = time() . '.' . $img->getClientOriginalExtension();
+            Image::make($img)->resize(300, 300)->save( public_path('/uploads/images/' . $filename ) );
+        }
+        $user = Auth::user();
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->image = $filename;
+        $user->save();
+        return view ('d_profile',array('user' => Auth::user()));
+    }
     public function p_profileUpdate(Request $request, User $user)
     {
         // handle update user
@@ -137,7 +154,7 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->save();
 
-            return view('profile', array('user' => Auth::user()) );;
+            return view('profile', array('user' => Auth::user()));;
         }
     }
     public function p_update(Request $request, User $user)
