@@ -43,9 +43,14 @@ class AllDosenController extends Controller
             'kk_id' => ['required'],
             'file' => ['mimes:pdf,|required'],
             ]);
+            $user = Auth::user();
             if ($files = $request->file('file')) {
-                $destinationPath = 'public/pdf/'; // upload path
-                if($destinationPath)
+                $destinationPath = 'public/pdf/'. $user->dosen->nip; // upload path
+                if(!File::isDirectory($destinationPath))
+                {
+                    File::makeDirectory($path, 0777, true, true);
+                }
+
                 $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
                 $files->move($destinationPath, $profileImage);
                 $insert['image'] = "$profileImage";

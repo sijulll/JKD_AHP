@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2020 at 06:25 AM
+-- Generation Time: Jul 14, 2020 at 07:11 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -35,6 +35,15 @@ CREATE TABLE `approvaldatas` (
   `note` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `approvaldatas`
+--
+
+INSERT INTO `approvaldatas` (`id`, `pak_id`, `status`, `note`) VALUES
+(1, 12, 1, NULL),
+(2, 13, 0, 'Salah'),
+(3, 11, 1, 'zaaaaq');
+
 -- --------------------------------------------------------
 
 --
@@ -42,10 +51,11 @@ CREATE TABLE `approvaldatas` (
 --
 
 CREATE TABLE `dosens` (
-  `nip` int(20) NOT NULL,
+  `nip` varchar(20) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `nama_dosen` varchar(250) NOT NULL,
   `alamat` text DEFAULT NULL,
-  `no_tlp` int(15) DEFAULT NULL,
+  `no_tlp` varchar(15) DEFAULT NULL,
   `j_id` int(2) UNSIGNED NOT NULL,
   `mulai_menjabat` date DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -56,10 +66,12 @@ CREATE TABLE `dosens` (
 -- Dumping data for table `dosens`
 --
 
-INSERT INTO `dosens` (`nip`, `nama_dosen`, `alamat`, `no_tlp`, `j_id`, `mulai_menjabat`, `created_at`, `updated_at`) VALUES
-(128200321, 'Dosen Kedua', 'Jalan Kedua No 32. Rt 07 RW 05', 878723144, 1, '2012-09-30', '2020-07-12 03:30:15', '2020-07-12 10:30:15'),
-(130200332, 'Dudy Dudidam', 'Dadidam no 12 RT 05 Rw 10, Kec.LancarJaya', 878723223, 2, '2011-07-22', '2020-07-12 03:31:32', '2020-07-12 10:31:32'),
-(481200332, 'Dosen Pertama', 'Dosen ABC Alamatnya Jl.Bundar bulat', 2123949923, 1, '2012-07-22', '2020-07-12 03:28:50', '2020-07-12 10:28:50');
+INSERT INTO `dosens` (`nip`, `user_id`, `nama_dosen`, `alamat`, `no_tlp`, `j_id`, `mulai_menjabat`, `created_at`, `updated_at`) VALUES
+('1123922321', 5, 'Dodit Mulyanto M.Kom', 'Jl Jeruk No 23 , Jakarta Pusat', '878722112', 1, '2018-11-15', '2020-07-13 09:08:40', '2020-07-13 16:17:45'),
+('1203922334', 4, 'Dudidam Dudidam S.Kom M.Kom', 'Dadadudu didam', '819292212', 3, '2020-03-05', '2020-07-13 09:08:40', '2020-07-13 16:17:45'),
+('1223422534', 6, 'Tami Nurhayati M.Kom', 'Jl Pepaya No 21 Kec.Buahan,Depok', '818223492', 1, '2018-12-04', '2020-07-13 09:14:22', '2020-07-13 16:17:45'),
+('1234202020', 7, 'Dosen Tester ', 'Digital Address', '928392002', 1, '2019-07-15', '2020-07-13 09:23:59', '2020-07-13 16:27:41'),
+('1239292933', 8, 'Dadi Sentosa M.Kom', 'Jl Naga 02 Kec.Buahan , Depok', '982737212', 1, '2019-08-05', '2020-07-13 09:23:59', '2020-07-13 16:27:41');
 
 -- --------------------------------------------------------
 
@@ -156,23 +168,31 @@ INSERT INTO `komponenkegiatans` (`id`, `jk_id`, `nama_kegiatan`, `kegiatan_point
 
 CREATE TABLE `pengajuanaks` (
   `id` int(12) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `dosen_id` int(20) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
   `kk_id` int(11) NOT NULL,
-  `files` varchar(250) NOT NULL,
+  `file` varchar(250) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `pengajuanaks`
+--
+
+INSERT INTO `pengajuanaks` (`id`, `user_id`, `kk_id`, `file`, `created_at`, `updated_at`) VALUES
+(11, 5, 10, 'file.pdf', '2020-07-14 17:06:53', '2020-07-15 00:06:53'),
+(12, 7, 6, 'another.pdf', '2020-07-14 17:07:13', '2020-07-15 00:07:13'),
+(13, 7, 2, 'again.pdf', '2020-07-14 17:07:30', '2020-07-15 00:07:30');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `poindosen`
+-- Table structure for table `poindosens`
 --
 
-CREATE TABLE `poindosen` (
+CREATE TABLE `poindosens` (
   `id` int(11) NOT NULL,
-  `dosen_id` int(20) NOT NULL,
+  `dosen_id` varchar(20) NOT NULL,
   `point` double NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp()
@@ -224,10 +244,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `username`, `password`, `email`, `image`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 1, 'admin Dua', '$2y$10$MrLuJyONDnfPKZj8HYMAxeuQeneQh3oC6mmY2R6.7ut4/57IqQmHy', 'admin2@admin.com', '1593440002.jpg', NULL, '2020-07-05 18:07:52', '2020-07-12 07:41:39'),
-(2, 2, 'penilai01', '$2y$10$o/SJY6Yt4btg984eDHO.kOtd6ymb4LHqrQ8mMAbkdHvWskRjXphsW', 'penilai@penilai.com', 'default.png', NULL, '2020-07-05 18:07:53', '2020-07-06 01:07:53'),
-(3, 3, 'Dosen Ku', '$2y$10$jIs/IerHNIsJbt33Bl3XYOlrWOo.EQXH4qkpRpK5Zd1MxZ6Eeryxq', 'dosen@dosen.com', 'default.png', NULL, '2020-07-05 18:07:53', '2020-07-06 01:07:53'),
-(4, 1, 'admin01', '*2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19', 'admin@admin.com', 'default.png', NULL, '2020-07-06 01:08:37', '2020-07-06 08:10:51');
+(2, 2, 'Penilai', '$2y$10$.4yzPJ3.Nutl/yBohhO2med5rSMFWgTTug641Ks8CJ2jEEzh0mmW.', 'penilai@penilai.com', 'default.png', NULL, '2020-07-13 02:07:55', '2020-07-13 09:07:55'),
+(3, 2, 'Penilai', '$2y$10$o.oVXuptchLBNYiF7FhLAelArO9kfluq.LJQ89HhoK0Vuj0zk8FJS', 'penilai2@penilai.com', 'default.png', NULL, '2020-07-13 02:07:56', '2020-07-13 09:07:56'),
+(4, 3, 'dudidam', '$2y$10$A5HVtYf126S/klgXZNuPieK1Tr7dUQDRNnFRTL48YJ1bBSZaOFbsu', 'dudiam@dosen.com', 'default.png', NULL, '2020-07-13 02:07:56', '2020-07-13 16:22:07'),
+(5, 3, 'dodimul', '$2y$10$UVtyRg2XNDWLCKJeweUPLeqsWY4mA2A99Z5ou9gktgackvUxK3Q4.', 'dodit.mulyanto@dosen.com', 'default.png', NULL, '2020-07-13 02:07:56', '2020-07-13 16:22:13'),
+(6, 3, 'Tamtam', '$2y$10$y3Qe2ELcBHEJcPBYSWIjyexEYlFabXhdX0ThAFTjKZD4h5HhvwGkG', 'tami.nurhayati@dosen.com', 'default.png', NULL, '2020-07-13 02:07:56', '2020-07-13 16:22:26'),
+(7, 3, 'Dosentester', '$2y$10$4mBFrJdsffp5A7vRvr3Y9e9X7ALaGxkUayBqfYiQylGMtPl.kKcRq', 'dosen@dosen.com', 'default.png', NULL, '2020-07-13 02:07:56', '2020-07-13 16:28:35'),
+(8, 3, 'Dadi880', '$2y$10$ojn0QtihT2i59ElSlFjyXOYaWQ1sEKICwS2/5djP3rYG6kMTa6/ZS', 'dadi.sentosa@dosen.com', 'default.png', NULL, '2020-07-13 02:07:56', '2020-07-13 16:22:54'),
+(9, 1, 'Admin', '$2y$10$Jcxe14wBpTddDiYgokqk0uJyLCU6NxAVehQ9XyG08RXN8xtqnOUeO', 'admin2@admin.com', 'default.png', NULL, '2020-07-13 02:07:55', '2020-07-13 09:07:55');
 
 --
 -- Indexes for dumped tables
@@ -238,7 +262,7 @@ INSERT INTO `users` (`id`, `role_id`, `username`, `password`, `email`, `image`, 
 --
 ALTER TABLE `approvaldatas`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `pak_constraint` (`pak_id`);
+  ADD UNIQUE KEY `pak_id` (`pak_id`);
 
 --
 -- Indexes for table `dosens`
@@ -247,7 +271,8 @@ ALTER TABLE `dosens`
   ADD PRIMARY KEY (`nip`),
   ADD UNIQUE KEY `nip_unique` (`nip`),
   ADD UNIQUE KEY `tlp_unique` (`no_tlp`),
-  ADD KEY `j_id` (`j_id`);
+  ADD KEY `dosens_ibfk_1` (`j_id`),
+  ADD KEY `dosens_ibfk_2` (`user_id`);
 
 --
 -- Indexes for table `jabatans`
@@ -273,15 +298,15 @@ ALTER TABLE `komponenkegiatans`
 --
 ALTER TABLE `pengajuanaks`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `dosen_id` (`dosen_id`),
-  ADD KEY `pengajuanak_ibfk_4` (`kk_id`);
+  ADD KEY `pengajuanaks_ibfk_1` (`user_id`),
+  ADD KEY `pengajuanaks_ibfk_4` (`kk_id`);
 
 --
--- Indexes for table `poindosen`
+-- Indexes for table `poindosens`
 --
-ALTER TABLE `poindosen`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `poindosens`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `poindosens_ibfk_1` (`dosen_id`);
 
 --
 -- Indexes for table `roles`
@@ -305,7 +330,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `approvaldatas`
 --
 ALTER TABLE `approvaldatas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `jabatans`
@@ -329,12 +354,12 @@ ALTER TABLE `komponenkegiatans`
 -- AUTO_INCREMENT for table `pengajuanaks`
 --
 ALTER TABLE `pengajuanaks`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `poindosen`
+-- AUTO_INCREMENT for table `poindosens`
 --
-ALTER TABLE `poindosen`
+ALTER TABLE `poindosens`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -347,7 +372,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
@@ -363,7 +388,8 @@ ALTER TABLE `approvaldatas`
 -- Constraints for table `dosens`
 --
 ALTER TABLE `dosens`
-  ADD CONSTRAINT `dosens_ibfk_1` FOREIGN KEY (`j_id`) REFERENCES `jabatans` (`id`);
+  ADD CONSTRAINT `dosens_ibfk_1` FOREIGN KEY (`j_id`) REFERENCES `jabatans` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `dosens_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `komponenkegiatans`
@@ -375,9 +401,14 @@ ALTER TABLE `komponenkegiatans`
 -- Constraints for table `pengajuanaks`
 --
 ALTER TABLE `pengajuanaks`
-  ADD CONSTRAINT `pengajuanaks_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `pengajuanaks_ibfk_2` FOREIGN KEY (`dosen_id`) REFERENCES `dosens` (`nip`),
-  ADD CONSTRAINT `pengajuanaks_ibfk_4` FOREIGN KEY (`kk_id`) REFERENCES `komponenkegiatans` (`id`);
+  ADD CONSTRAINT `pengajuanaks_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pengajuanaks_ibfk_4` FOREIGN KEY (`kk_id`) REFERENCES `komponenkegiatans` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `poindosens`
+--
+ALTER TABLE `poindosens`
+  ADD CONSTRAINT `poindosens_ibfk_1` FOREIGN KEY (`dosen_id`) REFERENCES `dosens` (`nip`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `users`

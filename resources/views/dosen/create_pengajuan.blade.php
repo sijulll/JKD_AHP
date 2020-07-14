@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.master_dosen')
 @section('title')
 Dosen - Jenjang Karier Dosen PNJ
 @endsection
