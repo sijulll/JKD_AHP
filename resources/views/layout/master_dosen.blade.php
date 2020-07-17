@@ -103,7 +103,7 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('dosen.dosen.datasaya')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Data Saya</p>
                   </a>
@@ -132,7 +132,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+              <a href="{{route('dosen.dosen.lihatpengajuan')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Lihat data pengajuan</p>
                 </a>
@@ -147,7 +147,7 @@
           </li>
           <li class="nav-header">Report</li>
           <li class="nav-item">
-            <a href="../calendar.html" class="nav-link">
+          <a href="{{route('dosen.dosen.pdf')}}" class="nav-link">
               <i class="nav-icon fa fa-file-pdf"></i>
               <p>
                 View Report
@@ -197,6 +197,13 @@
 $(document).ready(function () {
   bsCustomFileInput.init();
 });
+$(function() {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000
+    });
 </script>
 
 </body>

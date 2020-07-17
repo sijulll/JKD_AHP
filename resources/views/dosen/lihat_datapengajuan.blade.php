@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.master_dosen')
 @section('title')
     Dosen - Jenjang Karier Dosen PNJ
 @endsection
@@ -27,8 +27,8 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dosen Settings</li>
+            <li class="breadcrumb-item"><a href="{{route('dosen.dashboard')}}">Home</a></li>
+              <li class="breadcrumb-item active">Lihat Data Doosen</li>
             </ol>
           </div>
         </div>
@@ -41,10 +41,10 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Dosen Settings</h3>
+            <h3 class="card-title">Pengajuan Data Settings</h3>
             <div class="card-tools">
-            <a href="{{route('admin.dosen.create')}}" class="btn btn-success" > Add New </a>
-            </div>
+            {{-- <a href="{{route('admin.dosen.create')}}" class="btn btn-success" > Add New </a>
+            </div> --}}
           </div>
           <!-- /.card-header -->
           <div class="card-body">
@@ -52,41 +52,38 @@
               <thead>
               <tr>
                 <th>No</th>
-                <th>NIP</th>
                 <th>Nama Dosen</th>
-                <th>Alamat</th>
-                <th>No Tlp</th>
-                <th>Jabatan</th>
-                <th>Mulai Menjabat</th>
-                <th>Action</th>
+                <th>Kegiatan</th>
+                <th>File</th>
+                <th>Status</th>
+                <th>Note</th>
               </tr>
+              <?php $no=1; ?>
+              @foreach ($pengajuanData as $pengajuan)
+              <tr>
+                  <td>{{$no++}}</td>
+                  <td>{{$pengajuan->dosen->nama_dosen}}</td>
+                  <td>{{$pengajuan->komponenkegiatan->nama_kegiatan}}</td>
+                  <td>{{$pengajuan->file}}</td>
+                  <td>
+
+                   @if ($pengajuan->status == 0)
+                        <small class="badge badge-warning">On Progress</small>
+
+                    @elseif ($pengajuan->status == 1)
+                        <small class="badge badge-success">Diterima</small>
+
+                    @elseif ($pengajuan->status == 2)
+                        <small class="badge badge-danger">Ditolak</small>
+
+                    @endif
+
+                  </td>
+                <td>{{$pengajuan->note}}</td>
+              </tr>
+              @endforeach
               </thead>
               <tbody>
-                  <?php $no=1; ?>
-                  @foreach ($dosenData as $dosen)
-              <tr>
-              <td>{{$no++}}</td>
-              <td>{{$dosen->nip}}</td>
-              <td>{{$dosen->nama_dosen}}</td>
-              <td>{{$dosen->alamat}}</td>
-              <td>{{$dosen->no_tlp}}</td>
-              <td>{{$dosen->jabatan->nama_jabatan}}</td>
-              <td>{{$dosen->mulai_menjabat}}</td>
-                <td>
-                    <form action="{{ route('admin.dosen.destroy', $dosen->nip) }}" method="post">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                <a href="{{ route('admin.dosen.edit',$dosen->nip)}}" class="btn btn-warning " data-id="{{$dosen->nip}}" data-nama="{{$dosen->nama_jabatan}}" data-kum="{{$dosen->kum}}" >
-                        Edit
-                </a>
-                    <button type="submit" data-id="{{$dosen->nip}}" data-nama="{{$dosen->nama_jabatan}}" data-kum="{{$dosen->kum}}" class="btn btn-danger" >
-                        Delete
-                    </button>
-                    </form>
-                </td>
-              </tr>
-                  @endforeach
-              </tbody>
             </table>
           </div>
           <!-- /.card-body -->

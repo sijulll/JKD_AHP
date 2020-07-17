@@ -17,6 +17,11 @@ Dosen - Jenjang Karier Dosen PNJ
 @endsection
 
 @section('content')
+@if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -25,11 +30,6 @@ Dosen - Jenjang Karier Dosen PNJ
                 <div class="col-sm-6">
                     <h1>Pengajuan Kenaikan Jabatan</h1>
                 </div>
-                @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-                @endif
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -54,20 +54,9 @@ Dosen - Jenjang Karier Dosen PNJ
                             <i class="fas fa-minus"></i></button>
                     </div>
                 </div>
-                <form action="" method="POST" id="pengajuan_form">
+                <form action="{{route('dosen.dosen.ajukan')}}" enctype="multipart/form-data" method="POST" >
+                    {{ csrf_field() }}
                     <div class="card-body">
-                        <div class="form-group">
-                            <label>Dosen</label>
-                            <select class="form-control select2bs4" name="dosen_id" id="dosen_id"
-                                data-placeholder="Plih Dosen" style="width: 100%;">
-                                <option selected disabled>--- Pilih Dosen ---</option>
-                                @foreach ($dosenData as $dosen)
-                                <option value="{{$dosen->nip}}">
-                                    {{$dosen->nip}} || {{$dosen->nama_dosen}}
-                                </option>
-                                @endforeach
-                            </select>
-                        </div>
                         <div class="form-group">
                             <label>Jenis Kegiatan : </label>
                             <select class="form-control select2bs4" name="jk_id" id="jk_id" style="width: 100%;">
@@ -98,7 +87,7 @@ Dosen - Jenjang Karier Dosen PNJ
         <div class="row">
             <div class="container-fluid">
                 <div class="col-12 justify">
-                    <a href="#" class="btn btn-secondary">Cancel</a>
+                <a href="{{route('dosen.dashboard')}}" class="btn btn-secondary">Cancel</a>
                     <input type="submit" name="save" id="save" value="Save" class="btn btn-success float-right">
                 </div>
             </div>
@@ -163,5 +152,4 @@ Dosen - Jenjang Karier Dosen PNJ
         });
     });
 </script>
-
 @endsection

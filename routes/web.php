@@ -33,6 +33,8 @@ Route::resource('dosen', 'DosenController');
 //Grouping Penilai
 Route::group(['prefix'=>'penilai','namespace'=>'Penilai','middleware'=>['auth','penilai'],'as'=>'penilai.'], function(){
 Route::resource('approval', 'ApprovalController');
+Route::get('/penilai/approval','ApprovalController@index')->name('penilai.approval');
+Route::get('/penilai/lihat-data/{id}','ApprovalController@edit')->name('penilai.edit');
 });
 //Grouping Dosen
 Route::group(['prefix'=>'dosen','namespace'=>'Dosen','middleware'=>['auth','dosen'],'as'=>'dosen.'], function(){
@@ -40,4 +42,8 @@ Route::get('/dosen/lihatjabatan','AllDosenController@lihat_jabatan')->name('dose
 Route::get('/dosen/lihatkomponenkegiatan','AllDosenController@lihat_kk')->name('dosen.lihatkomponenkegiatan');
 Route::get('/dosen/pengajuan-angka-kredit','AllDosenController@view_pengajuan')->name('dosen.pengajuan');
 Route::get('/dosen/pengajuan/getKK/{id}','AllDosenController@getKK');
+Route::get('/dosen/lihat-data-pengajuan','AllDosenController@lihat_pengajuan')->name('dosen.lihatpengajuan');
+Route::post('/dosen/ajukan','AllDosenController@ajukan')->name('dosen.ajukan');
+Route::get('/dosen/data-saya','AllDosenController@lihat_datasaya')->name('dosen.datasaya');
+Route::get('/dosen/data-saya/pdf','AllDosenController@cetakpdf')->name('dosen.pdf');
 });

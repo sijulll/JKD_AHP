@@ -40,4 +40,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(pengajuanak::class);
     }
+    public function dosen()
+    {
+        return $this->hasOne('App\dosen');
+    }
+
 }

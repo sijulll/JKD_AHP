@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Penilai;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\pengajuanak;
 class ApprovalController extends Controller
 {
     /**
@@ -14,7 +15,8 @@ class ApprovalController extends Controller
      */
     public function index()
     {
-        //
+        $pengajuanData = pengajuanak::where('status','=','0')->get();
+        return view('penilai.approval',compact('pengajuanData'));
     }
 
     /**
@@ -57,7 +59,8 @@ class ApprovalController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pengajuanData = pengajuanak::where('id',$id)->get();
+        return view('penilai.lihat_dataapproval',compact('pengajuanData'));
     }
 
     /**
@@ -69,7 +72,11 @@ class ApprovalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dosenData = pengajuanak::where('id',$id)->first();
+        $dosenData->note = $request->note;
+        $dosenData->status = $request->status;
+        $dosenData->save();
+        return redirect()->route('penilai.approval.index')->with('alert-success','data berhasil diubah.');
     }
 
     /**

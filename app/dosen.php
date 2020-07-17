@@ -1,7 +1,6 @@
 <?php
 
 namespace App;
-
 use Illuminate\Database\Eloquent\Model;
 
 class dosen extends Model
@@ -16,6 +15,10 @@ class dosen extends Model
     }
     public function pengajuanak()
     {
-        return $this->hasMany(pengajuanak::class);
+        return $this->hasMany('App\pengajuanak');
+    }
+    public function user()
+    {
+        return $this->belongsTo('App\user', 'user_id');
     }
 }
