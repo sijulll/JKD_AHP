@@ -11,6 +11,8 @@ use App\komponenkegiatan;
 use App\jeniskegiatan;
 use App\dosen;
 use App\pengajuanak;
+use App\hasil_pengajuan;
+use App\User;
 use PDF;
 
 class AllDosenController extends Controller
@@ -21,9 +23,22 @@ class AllDosenController extends Controller
         $jabatanData= jabatan::all();
         return view('dosen.lihat_jabatan',compact('jabatanData'));
     }
-     public function lihat_datasaya()
+     public function lihat_datasaya($id)
     {
-        return view('dosen.data_saya');
+        $user = Auth::user();
+        // $users = $user->dosen->nip;
+        $dosen = dosen::where('nip',$user->dosen->nip)->get();
+        $qb = DB::table('hasil_pengajuan')->select(DB::raw('SUM(hasil_kegiatan_point) AS kum'))->where('dosen_id',$user->dosen->nip)->get();
+        $qbDetailKUM = DB::table('kum_segmented')->select(DB::raw('nama_jk, SUM(hasil_kegiatan_point) AS kum'))->where('dosen_id',$user->dosen->nip)->groupBy('nama_jk')->get();
+        $proc = DB::select('call ambilKesimpulanLayak(?)', [$id]);
+        return view('dosen.data_saya',compact('dosen','qb','qbDetailKUM','proc'));
+    }
+    public function lihat_kelayakan($id)
+    {
+        $user = Auth::user();
+        $dosen = $user->dosen->nip;
+        $kelayakan = DB::select('call ambilKesimpulanLayak(?) = ?', [$id]);
+        // return DB::select('call ambilKesimpulanLayak (:dosen)'),array('dosen' => $dosen);
     }
     public function lihat_kk()
     {
@@ -51,6 +66,11 @@ class AllDosenController extends Controller
         return json_encode($kk_id);
     }
 
+    public function getRekomend($id)
+    {
+
+    }
+
 
 
 
@@ -59,7 +79,7 @@ class AllDosenController extends Controller
     {
         // dd($request);
         $this->validate($request, [
-            // // 'kk_id' => ['required'],
+            // 'kk_id' => ['required'],
             // 'file' => ['mimes:pdf|required'],
             ]);
 
@@ -78,7 +98,8 @@ class AllDosenController extends Controller
             $pengajuanData->file = $filename->getClientOriginalName();
             $pengajuanData->save();
 
-            return view ('dosen.create_pengajuan')->with(['success' => 'Pesan Berhasil']);
+         return redirect()->back();
+             // return view ('dosen.create_pengajuan')->with(['success' => 'Pesan Berhasil']);
             // return view ('dosen.lihat_datapengajuan',array('pengajuanData' => pengajuanak::where('dosen_id',$user->dosen->nip)))->with('alert-success','Data berhasil ditambahkan !');
     }
 

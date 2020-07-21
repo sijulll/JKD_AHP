@@ -21,70 +21,107 @@ Dosen - Jenjang Karier Dosen PNJ
     <!-- Content Header (Page header) -->
     <section class="content">
         <div class="row">
-          <div class="col-md-12">
-            <div class="card card-black">
-              <div class="card-header">
-                <h3 class="card-title">Data Saya</h3>
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                    <i class="fas fa-minus"></i></button>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Data Saya</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                                title="Collapse">
+                                <i class="fas fa-minus"></i></button>
+                        </div>
+                    </div>
+                    @foreach ($dosen as $d)
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="inputName">NIP</label>
+                            <input type="text" id="" class="form-control" value="{{$d->nip}}" disabled>
+                            <label for="inputName">Nama</label>
+                            <input type="text" id="" class="form-control" value="{{$d->nama_dosen}}" disabled>
+                            <label for="inputName">Jabatan</label>
+                            <input type="text" id="" class="form-control" value="{{$d->jabatan->nama_jabatan}}"
+                                disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputClientCompany">Mulai Menjabat</label>
+                            <input type="text" id="" class="form-control" value="{{$d->mulai_menjabat}}" disabled>
+                            @foreach ($qb as $qb)
+                            <label for="inputProjectLeader">Poin Kum saya</label>
+                            <input type="text" id="" class="form-control" value="{{$qb->kum}}" disabled>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
-              </div>
-              <div class="card-body">
-                <div class="form-group">
-                  <label for="inputName">NIP</label>
-                  <input type="text" id="" class="form-control" placeholder="NIP Dosen" disabled>
-                  <label for="inputName">Nama</label>
-                  <input type="text" id="" class="form-control" placeholder="Nama Dosen" disabled>
-                  <label for="inputName">Jabatan</label>
-                  <input type="text" id="" class="form-control" placeholder="Jabatan Saat Ini" disabled>
+                <!-- /.card-body -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Data KUM Saya</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                                title="Collapse">
+                                <i class="fas fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table id="table_jabatan" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nama Kegiatan</th>
+                                    <th>Point Kum</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($qbDetailKUM as $dk)
+                                <tr>
+                                    <td>{{$dk->nama_jk}}</td>
+                                    <td>{{$dk->kum}}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="form-group">
-                      <label for="inputClientCompany">Mulai Menjabat</label>
-                      <input type="text" id="" class="form-control" placeholder="Mulai Menjabat" disabled>
-                      <label for="inputProjectLeader">Poin Kum saya</label>
-                      <input type="text" id="" class="form-control" placeholder="Poin Kum Dosen" disabled>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Tabel Kelayakan</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                            title="Collapse">
+                            <i class="fas fa-minus"></i></button>
+                    </div>
                 </div>
-              </div>
-              <!-- /.card-body -->
-              <!-- /.card-header -->
-          <div class="card-body">
-            <table id="table_jabatan" class="table table-bordered table-hover">
-              <thead>
-              <tr>
-                <th>No</th>
-                <th>Nama Jabatan</th>
-                <th>Rekomendasi</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-              <td>1</td>
-              <td>Asisten Ahli</td>
-              <td>Sudah Layak</td>
-              </tr>
-              <tr>
-              <td>2</td>
-              <td>Lektor</td>
-              <td>Sudah Layak</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Guru Besar</td>
-                <td>Belum Layak</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <!-- /.card-body -->
+                    <div class="card-body">
+                        <table id="table_jabatan" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nama Jabatan</th>
+                                    <th>kelayakan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($proc as $p)
+                                <tr>
+                                    <td>{{$p->nama_jabatan}}</td>
+                                    <td>{{$p->kesimpulan}}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <!-- /.card -->
-          </div>
-          </div>
-      </section>
-      <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
+        </div>
+        <!-- /.card-body -->
+
+        <!-- /.card -->
+
+</div>
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
 </div>
 @endsection
 @section('footer_link')
@@ -125,7 +162,7 @@ Dosen - Jenjang Karier Dosen PNJ
             var jk = jQuery(this).val();
             if (jk) {
                 jQuery.ajax({
-                    url: 'pengajuan/getKK/' +jk,
+                    url: 'pengajuan/getKK/' + jk,
                     type: "GET",
                     dataType: "json",
                     success: function (data) {
@@ -142,6 +179,7 @@ Dosen - Jenjang Karier Dosen PNJ
             }
         });
     });
+
 </script>
 
 @endsection

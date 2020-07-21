@@ -44,6 +44,7 @@ Route::get('/dosen/pengajuan-angka-kredit','AllDosenController@view_pengajuan')-
 Route::get('/dosen/pengajuan/getKK/{id}','AllDosenController@getKK');
 Route::get('/dosen/lihat-data-pengajuan','AllDosenController@lihat_pengajuan')->name('dosen.lihatpengajuan');
 Route::post('/dosen/ajukan','AllDosenController@ajukan')->name('dosen.ajukan');
-Route::get('/dosen/data-saya','AllDosenController@lihat_datasaya')->name('dosen.datasaya');
+Route::get('/dosen/data-saya/{id}','AllDosenController@lihat_datasaya')->name('dosen.datasaya');
+Route::get('/dosen/kelayakan/{id}','AllDosenController@lihat_kelayakan')->name('dosen.kelayakan');
 Route::get('/dosen/data-saya/pdf','AllDosenController@cetakpdf')->name('dosen.pdf');
 });

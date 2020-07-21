@@ -64,7 +64,8 @@
                   <td>{{$no++}}</td>
                   <td>{{$pengajuan->dosen->nama_dosen}}</td>
                   <td>{{$pengajuan->komponenkegiatan->nama_kegiatan}}</td>
-                  <td>{{$pengajuan->file}}</td>
+                  <td><i class="fa fa-file-pdf" ></i></td>
+                  {{-- {{$pengajuan->file}} --}}
                   <td>
 
                    @if ($pengajuan->status == 0)
