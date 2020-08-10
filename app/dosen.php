@@ -15,7 +15,7 @@ class dosen extends Model
     }
     public function pengajuanak()
     {
-        return $this->hasMany('App\pengajuanak');
+        return $this->hasMany(pengajuanak::class);
     }
     public function user()
     {

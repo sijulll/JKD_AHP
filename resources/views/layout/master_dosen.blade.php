@@ -194,16 +194,7 @@
 <script src="{{asset('plugins/sweetalert2/sweetalert2.min.js')}}"></script>
 @yield('footer_link')
 <script type="text/javascript">
-$(document).ready(function () {
-  bsCustomFileInput.init();
-});
-$(function() {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000
-    });
+
 </script>
 
 </body>

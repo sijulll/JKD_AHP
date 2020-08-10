@@ -62,8 +62,8 @@
               @foreach ($pengajuanData as $pengajuan)
               <tr>
                   <td>{{$no++}}</td>
-                  <td>{{$pengajuan->dosen->nama_dosen}}</td>
-                  <td>{{$pengajuan->komponenkegiatan->nama_kegiatan}}</td>
+                  <td>{{$pengajuan->getDosen->nama_dosen}}</td>
+                  <td>{{$pengajuan->getKomponenkegiatan->nama_kegiatan}}</td>
                   <td><i class="fa fa-file-pdf" ></i></td>
                   {{-- {{$pengajuan->file}} --}}
                   <td>

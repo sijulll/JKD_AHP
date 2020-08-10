@@ -18,7 +18,7 @@ class pengajuanak extends Model
     }
     public function getKomponenkegiatan()
     {
-        return $this->belongsTo('App\komponenkegiatan','id');
+        return $this->belongsTo('App\komponenkegiatan','kk_id');
 
     }
 }

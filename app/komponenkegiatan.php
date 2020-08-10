@@ -16,6 +16,6 @@ class komponenkegiatan extends Model
     //hasMany
     public function pengajuanak()
     {
-        return $this->hasMany('App\pengajuanak');
+        return $this->hasMany(pengajuanak::class);
     }
 }
