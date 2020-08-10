@@ -12,4 +12,8 @@ class jabatan extends Model
     {
         return $this->hasMany('App\dosen');
     }
+    public function kriteria()
+    {
+        return $this->hasMany(kriteria::class);
+    }
 }

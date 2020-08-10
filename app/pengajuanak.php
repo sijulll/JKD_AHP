@@ -12,11 +12,11 @@ class pengajuanak extends Model
     {
         return $this->belongsTo('App\User','id');
     }
-    public function dosen()
+    public function getDosen()
     {
         return $this->belongsTo('App\dosen','dosen_id');
     }
-    public function komponenkegiatan()
+    public function getKomponenkegiatan()
     {
         return $this->belongsTo('App\komponenkegiatan','id');
 

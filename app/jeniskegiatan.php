@@ -14,4 +14,8 @@ class jeniskegiatan extends Model
     {
         return $this->hasMany(komponenkegiatan::class);
     }
+    public function kriteria()
+    {
+        return $this->hasMany(kriteria::class);
+    }
 }

@@ -41,6 +41,12 @@ class KomponenKegiatanController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'jk_id' => 'required',
+            'nama_kegiatan' => 'required',
+            'kegiatan_point' => 'required',
+        ]);
+
         $komponenkegiatanData = new komponenkegiatan();
         $komponenkegiatanData->jk_id = $request->jk_id;
         $komponenkegiatanData->nama_kegiatan = $request->nama_kegiatan;
@@ -91,7 +97,7 @@ class KomponenKegiatanController extends Controller
         $komponenkegiatanData->kegiatan_point = $request->kegiatan_point;
         $komponenkegiatanData->deskripsi = $request->deskripsi;
         $komponenkegiatanData->save();
-        return redirect()->route('admin.komponenkegiatan.index')->with('alert-success','data berhasil diubah.');
+        return redirect()->route('admin.komponenkegiatan.index')->with('alert-success', 'Data Berhasil Diubah');
     }
 
     /**
@@ -105,6 +111,6 @@ class KomponenKegiatanController extends Controller
         //
         $komponenkegiatanData =komponenkegiatan::where('id',$id)->first();
         $komponenkegiatanData->delete();
-        return redirect()->route('admin.komponenkegiatan.index')->with('alert-success','Data berhasil dihapus.');
+        return redirect()->route('admin.komponenkegiatan.index')->with('success','Data berhasil dihapus.');
     }
 }

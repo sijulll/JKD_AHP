@@ -17,11 +17,6 @@ Dosen - Jenjang Karier Dosen PNJ
 @endsection
 
 @section('content')
-@if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-@endif
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -46,6 +41,21 @@ Dosen - Jenjang Karier Dosen PNJ
         <div class="container-fluid">
             <!-- SELECT2 EXAMPLE -->
             <div class="card card-default">
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if(\Session::has('alert-success'))
+            <div class="alert alert-success" aria-label="close">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <div>{{Session::get('alert-success')}}</div>
+            </div>
+            @endif
                 <div class="card-header">
                     <h3 class="card-title">Form Pengajuan Angka Kredit</h3>
                     <div class="card-tools">

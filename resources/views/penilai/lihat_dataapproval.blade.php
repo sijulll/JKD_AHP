@@ -45,11 +45,11 @@
                 {{ method_field('PUT') }}
                   <div class="form-group">
                       <label for="nip">Nama Dosen :</label>
-                    <input type="text" id="dosen_id" name="dosen_id" class="form-control" placeholder="Nama Dosen" value="{{$pengajuan->dosen->nama_dosen}}"  disabled>
+                    <input type="text" id="dosen_id" name="dosen_id" class="form-control" placeholder="Nama Dosen" value="{{$pengajuan->getDosen->nama_dosen}}"  disabled>
                   </div>
                   <div class="form-group">
                     <label for="Deskripsi">Kategori Kegiatan :</label>
-                  <textarea class="form-control" rows="3" id="kk_id" name="kk_id" required disabled>{{$pengajuan->komponenkegiatan->nama_kegiatan}}</textarea>
+                  <textarea class="form-control" rows="3" id="kk_id" name="kk_id" required disabled>{{$pengajuan->getKomponenkegiatan->nama_kegiatan}}</textarea>
                   </div>
                   <div class="form-group">
                     <label for="file">File :</label>
@@ -58,8 +58,8 @@
                   <div class="form-group">
                       <label for="inputStatus">Keputusan :</label>
                       <select class="form-control custom-select" id="status" name="status" >
-                      <option value="1">Setujui</option>
-                      <option value="2">Tolak</option>
+                      <option value="1">Cukup</option>
+                      <option value="2">Kurang</option>
                       </select>
                   </div>
                   <div class="form-group">

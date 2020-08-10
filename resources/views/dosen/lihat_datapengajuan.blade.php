@@ -34,7 +34,6 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
  <!-- Main content -->
  <section class="content">
     <div class="row">
@@ -47,9 +46,9 @@
             </div> --}}
           </div>
           <!-- /.card-header -->
-          <div class="card-body">
+         <div class="card-body">
             <table id="default" class="table table-bordered table-hover">
-              <thead>
+                <thead>
               <tr>
                 <th>No</th>
                 <th>Nama Dosen</th>
@@ -58,6 +57,7 @@
                 <th>Status</th>
                 <th>Note</th>
               </tr>
+                </thead>
               <?php $no=1; ?>
               @foreach ($pengajuanData as $pengajuan)
               <tr>

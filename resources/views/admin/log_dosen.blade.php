@@ -9,7 +9,6 @@ Komponen Kegiatan - Jenjang Karier Dosen PNJ
 <!-- DataTables -->
 <link rel="stylesheet" href="{{asset('plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}">
 @endsection
-
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -18,12 +17,12 @@ Komponen Kegiatan - Jenjang Karier Dosen PNJ
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Komponen Kegiatan</h1>
+                    <h1>Log Aktifitas Dosen</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Komponen Kegiatan Settings</li>
+                        <li class="breadcrumb-item active">Log Aktifitas Dosen</li>
                     </ol>
                 </div>
             </div>
@@ -48,11 +47,11 @@ Komponen Kegiatan - Jenjang Karier Dosen PNJ
                 @endif
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Komponen Kegiatan Settings</h3>
-                        <div class="card-tools">
+                        <h3 class="card-title">Log Aktifitas Pengajuan</h3>
+                        {{-- <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#modal-create">
                                 <i class="fas fa-plus"></i></button>
-                        </div>
+                        </div> --}}
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -60,46 +59,22 @@ Komponen Kegiatan - Jenjang Karier Dosen PNJ
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Kategori Kegiatan</th>
-                                    <th>Nama Kegiatan</th>
-                                    <th>Kegiatan Poin</th>
-                                    <th>Deskripsi</th>
-                                    <th>Actions</th>
+                                    <th>Aktifitas</th>
+                                    <th>Tanggal Pengajuan</th>
+                                    <th>Yang Mengajukan</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $no=1; ?>
-                                @foreach ($komponenkegiatanData as $komponenkegiatan)
+                                @foreach ($logData as $ld)
 
-                                <tr class="komponenkegiatan{{$komponenkegiatan->id}}">
+                                <tr>
                                     <td>{{ $no++ }}</td>
                                     <td>
-                                        {{$komponenkegiatan->jeniskegiatan->nama_jk}}
+                                        {{$ld->keterangan}}
                                     </td>
-                                    <td>{{$komponenkegiatan->nama_kegiatan}}</td>
-                                    <td>{{$komponenkegiatan->kegiatan_point}}</td>
-                                    <td>{{$komponenkegiatan->deskripsi}}</td>
-                                    <td>
-
-                                        <form
-                                            action="{{ route('admin.komponenkegiatan.destroy', $komponenkegiatan->id) }}"
-                                            method="post">
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-                                            <a href="{{ route('admin.komponenkegiatan.edit',$komponenkegiatan->id)}}"
-                                                class="btn btn-warning show-modal" data-id="{{$komponenkegiatan->id}}"
-                                                data-nama="{{$komponenkegiatan->nama_kegiatan}}"
-                                                data-deskripsi="{{$komponenkegiatan->deskripsi}}">
-                                                Edit
-                                            </a>
-                                            <button type="submit" data-id="{{$komponenkegiatan->id}}"
-                                                data-nama="{{$komponenkegiatan->nama_kegiatan}}"
-                                                data-deskripsi="{{$komponenkegiatan->deskripsi}}"
-                                                class="btn btn-danger">
-                                                Delete
-                                            </button>
-                                        </form>
-                                    </td>
+                                    <td>{{$ld->datetime}}</td>
+                                    <td>{{$ld->nip}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -115,54 +90,7 @@ Komponen Kegiatan - Jenjang Karier Dosen PNJ
     </section>
     <!-- /.content -->
 </div>
-<div class="modal fade" id="modal-create">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Add Data</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="{{route('admin.komponenkegiatan.store')}}" method="POST">
-                {{ csrf_field() }}
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="inputStatus">Jenis Kegiatan</label>
-                        <select class="form-control custom-select" id="jk_id" name="jk_id" required>
-                            <option selected disabled>Select one</option>
-                            @foreach ($jeniskegiatanData as $jeniskegiatan)
-                            <option value="{{$jeniskegiatan->id}}">
-                                {{$jeniskegiatan->nama_jk}}
-                            </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="nama_kegiatan">Nama Kegiatan</label>
-                        <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan"
-                            placeholder="Nama Jenis Kegiatan" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="kegiatan_point">Poin Kegiatan</label>
-                        <input type="text" class="form-control" id="kegiatan_point" name="kegiatan_point"
-                            placeholder="Kegiatan Point" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="deskripsi">Deskripsi</label>
-                        <textarea class="form-control" rows="3" id="deskripsi" name="deskripsi"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-            </form>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
+
 <!-- /.modal -->
 
 {{-- <div class="modal fade" id="modal-update">

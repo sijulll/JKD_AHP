@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="{{asset('plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}">
 @endsection
 
+@section('content')
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -34,6 +35,15 @@
 <section class="content">
     <div class="row">
       <div class="col-md-12">
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
         <div class="card card-black">
           <div class="card-header">
             <h3 class="card-title">Edit Data Jabatan</h3>

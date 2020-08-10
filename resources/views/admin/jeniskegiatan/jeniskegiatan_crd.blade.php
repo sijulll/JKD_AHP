@@ -11,11 +11,6 @@
 @endsection
 
 @section('content')
-            @if(Session::has('alert-success'))
-                <div class="alert alert-success">
-                    <strong>{{ \Illuminate\Support\Facades\Session::get('alert-success') }}</strong>
-                </div>
-            @endif
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -23,12 +18,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>jeniskegiatan</h1>
+            <h1>Jenis Kegiatan</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Kriterias Settings</li>
+              <li class="breadcrumb-item active">Jenis Kegiatan Settings</li>
             </ol>
           </div>
         </div>
@@ -39,9 +34,21 @@
  <section class="content">
     <div class="row">
       <div class="col-12">
+        @if(\Session::has('alert'))
+        <div class="alert alert-danger" aria-label="close">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>>
+            <div>{{Session::get('alert')}}</div>
+        </div>
+        @endif
+        @if(\Session::has('alert-success'))
+        <div class="alert alert-success" aria-label="close">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <div>{{Session::get('alert-success')}}</div>
+        </div>
+        @endif
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Kriterias Settings</h3>
+            <h3 class="card-title">Jenis Kegiatan Settings</h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool"  data-toggle="modal" data-target="#modal-create">
                   <i class="fas fa-plus"></i></button>

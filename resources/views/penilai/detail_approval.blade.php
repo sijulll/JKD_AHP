@@ -54,7 +54,8 @@
               <tr>
                 <th>No</th>
                 <th>Nama Dosen</th>
-                <th>Nip</th>
+                <th>Jenis Kegiatan</th>
+                <th>Komponen Kegiatan</th>
                 <th>Action</th>
               </tr>
               </thead>
@@ -62,11 +63,12 @@
                 <?php $no=1; ?>
                 @foreach ($pengajuanData as $pengajuan)
               <tr>
-              <td width="5%">{{$no++}}</td>
-              <td width="35%">{{$pengajuan->dosen_id}}</td>
-              <td width="40%">{{$pengajuan->nama_dosen}}</td>
-              <td width="20%"> <a href="{{route('penilai.penilai.approval.detail',$pengajuan->dosen_id)}}" class="btn btn-primary"  >
-                Lihat Detail Pengajuan
+              <td width="2%">{{$no++}}</td>
+              <td width="15%">{{$pengajuan->getDosen->nama_dosen}}</td>
+              <td width="30%">{{$pengajuan->getKomponenkegiatan->jeniskegiatan->nama_jk}}</td>
+              <td width="40%">{{$pengajuan->getKomponenkegiatan->nama_kegiatan}}</td>
+              <td width="13%"> <a href="{{route('penilai.penilai.edit',$pengajuan->id)}}" class="btn btn-primary"  >
+                Lihat Data
                 </a>
            </td>
               </tr>

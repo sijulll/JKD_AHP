@@ -74,7 +74,7 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="uploads/images/{{Auth::user()->image}}" class="img-circle elevation-2">
+          <img src="public/uploads/images/{{Auth::user()->image}}" class="img-circle elevation-2">
         </div>
         <div class="info">
           <a href="#" class="d-block">{{Auth::user()->username }} </a>
@@ -109,6 +109,18 @@
                     <p>List Dosen</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.admin.logDosen')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Log Aktifitas Pengjuan AK</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('admin.admin.logPenilai')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Log Aktifitas Penilai</p>
+                    </a>
+                  </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
@@ -127,6 +139,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{route('admin.kriteria.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Settings Kriteria</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{route('admin.komponenkegiatan.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Settings Komponen Kegiatan</p>
@@ -140,15 +158,6 @@
               </li>
             </ul>
           </li>
-          <li class="nav-header">Report</li>
-          <li class="nav-item">
-            <a href="../calendar.html" class="nav-link">
-              <i class="nav-icon fa fa-file-pdf"></i>
-              <p>
-                General Report
-              </p>
-            </a>
-          </li>
           </li>
          </ul>
       </nav>
@@ -161,9 +170,9 @@
 
   <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.0.3-pre
+      <b>Version</b> 1.0
     </div>
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
+    <strong>Copyright &copy; Jenjang Karir Dosen 2020 </strong> All rights
     reserved.
   </footer>
 

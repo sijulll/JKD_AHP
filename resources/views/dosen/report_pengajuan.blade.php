@@ -37,8 +37,9 @@
                         Disetujui
                     @endif
                 </td>
-			</tr>
-			@endforeach
+            </tr>
+
+            @endforeach
 		</tbody>
     </table>
     <footer>

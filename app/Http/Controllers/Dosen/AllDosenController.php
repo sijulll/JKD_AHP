@@ -78,11 +78,16 @@ class AllDosenController extends Controller
     public function ajukan(Request $request)
     {
         // dd($request);
-        $this->validate($request, [
-            // 'kk_id' => ['required'],
-            // 'file' => ['mimes:pdf|required'],
-            ]);
+        $request->validate([
 
+            'kk_id' => 'required',
+            'file' => 'required|mimes:pdf'
+        ],
+    [
+        'kk_id.required' => 'Komponen Kegiatan tidak boleh kosong',
+        'file.required' => 'Sertakan file berformat pdf',
+        'file.mimes' => 'Sertakan file berformat pdf',
+    ]);
 
 
             if($request->hasFile('file'))
@@ -98,7 +103,7 @@ class AllDosenController extends Controller
             $pengajuanData->file = $filename->getClientOriginalName();
             $pengajuanData->save();
 
-         return redirect()->back();
+         return redirect()->back()->with('alert-success','Data berhasil di ajukan');
              // return view ('dosen.create_pengajuan')->with(['success' => 'Pesan Berhasil']);
             // return view ('dosen.lihat_datapengajuan',array('pengajuanData' => pengajuanak::where('dosen_id',$user->dosen->nip)))->with('alert-success','Data berhasil ditambahkan !');
     }

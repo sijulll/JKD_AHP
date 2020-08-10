@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title')
-    jeniskegiatan - Jenjang Karier Dosen PNJ
+    kriteria - Jenjang Karier Dosen PNJ
 @endsection
 
 @section('head_link')
@@ -18,12 +18,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Komponen Kegiatan</h1>
+            <h1>Kriteria</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{route('admin.komponenkegiatan.index')}}">Komponen Kegiatan Settings</a></li>
+            <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{route('admin.kriteria.index')}}">Kriteria Settings</a></li>
               <li class="breadcrumb-item active">Edit</li>
             </ol>
           </div>
@@ -41,33 +41,21 @@
           </div>
           <div class="card-body">
 
-            @foreach ($komponenkegiatanData as $komponenkegiatan)
-            <form action="{{route('admin.komponenkegiatan.update', $komponenkegiatan->id)}}" method="post">
+            @foreach ($kriteriaData as $kriteria)
+            <form action="{{route('admin.kriteria.update', $kriteria->id)}}" method="post">
                 {{ csrf_field() }}
                 {{ method_field('PUT') }}
-                <div class="form-group">
-                    <label for="inputStatus">Komponen Kegiatan</label>
-                    <select class="form-control custom-select" id="jk_id" name="jk_id" >
-                      @foreach ($jeniskegiatanData as $jk)
-                    <option value="{{$jk->id}}" @if ($jk->id == $komponenkegiatan->jk_id)
-                        selected
-                    @endif>
-                        {{$jk->nama_jk}}
-                    </option>
-                    @endforeach
-                    </select>
-                  </div>
+
             <div class="form-group">
-                <label for="nama_kegiatan">Nama Kegiatan</label>
-            <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan" placeholder="Nama Komponen Kegiatan" value="{{$komponenkegiatan->nama_kegiatan}}">
+                <label for="nama_kegiatan">Jabatan</label>
+            <input type="text" class="form-control" id="j_id" name="j_id" placeholder="Nama Komponen Kegiatan" value="{{$kriteria->getjabatan->nama_jabatan}}" disabled >
+            </div>
+            <div class="form-group">Kriteria</label>
+                <input type="text" class="form-control" id="jk_id" name="jk_id" placeholder="Kegiatan Point" value="{{$kriteria->getjeniskegiatan->nama_jk}}" disabled>
             </div>
             <div class="form-group">
-                <label for="kegiatan_point">Point Kegiatan</label>
-                <input type="text" class="form-control" id="kegiatan_point" name="kegiatan_point" placeholder="Kegiatan Point" value="{{$komponenkegiatan->kegiatan_point}}">
-            </div>
-            <div class="form-group">
-                <label for="deskripsi">Deskripsi</label>
-                <textarea class="form-control" rows="3" id="deskripsi" name="deskripsi">{{$komponenkegiatan->deskripsi}}</textarea>
+                <label for="kegiatan_point">Bobot Nilai (%)</label>
+                <input type="text" class="form-control" id="nilai" name="nilai" placeholder="Kegiatan Point" value="{{$kriteria->nilai}}">
             </div>
             </div>
           </div>
@@ -78,7 +66,7 @@
       </div>
     <div class="row">
       <div class="col-12 justify" >
-      <a href="{{route('admin.komponenkegiatan.index')}}" class="btn btn-secondary">Cancel</a>
+      <a href="{{route('admin.kriteria.index')}}" class="btn btn-secondary">Cancel</a>
         <input type="submit" value="Save Data" class="btn btn-success float-right">
       </div>
     </div>

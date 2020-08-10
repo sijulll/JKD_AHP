@@ -233,6 +233,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         //Dom PDF
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'LogActivity' => App\Helpers\LogActivity::class,
 
     ],
 

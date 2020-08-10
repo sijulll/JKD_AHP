@@ -33,17 +33,37 @@
 <section class="content">
     <div class="row">
       <div class="col-md-12">
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
         <div class="card card-black">
           <div class="card-header">
             <h3 class="card-title">Create Data Dosen</h3>
           </div>
           <div class="card-body">
-
             <form action="{{route('admin.dosen.store')}}" method="POST">
                 {{ csrf_field() }}
-            <div class="form-group">
+                <div class="form-group">
+                    <label for="nip">Email :</label>
+                      <input type="email" id="email" name="email" class="form-control" placeholder="Email is Unique"  required >
+                      </div>
+                <div class="form-group">
+                <label for="nip">Username :</label>
+                  <input type="text" id="username" name="username" class="form-control" placeholder="Username"  required >
+                  </div>
+                  <div class="form-group">
+                    <label for="nip">Default Password :</label>
+                      <input type="password" id="password" name="password" class="form-control" placeholder="Type your password"  required >
+                  </div>
+                 <div class="form-group">
               <label for="nip">NIP :</label>
-            <input type="text" id="nip" name="nip" class="form-control" placeholder="NIP Dosen"  required >
+            <input type="text" id="nip" name="nip" class="form-control" placeholder="NIP Dosen must be Unique"  required >
             </div>
             <div class="form-group">
                 <label for="nip">Nama Dosen :</label>
@@ -58,7 +78,7 @@
               <input type="text" id="no_tlp" name="no_tlp" class="form-control" placeholder="No telpom"  required >
             </div>
             <div class="form-group">
-                <label for="inputStatus">Jenis Kegiatan</label>
+                <label for="inputStatus">Jabatan Saat Ini:</label>
                 <select class="form-control custom-select" id="j_id" name="j_id" >
                   <option selected disabled>Select one</option>
                   @foreach ($jabatanData as $jabatan)

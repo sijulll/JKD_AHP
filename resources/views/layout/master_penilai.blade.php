@@ -104,13 +104,13 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{route('dosen.dosen.lihatjabatan')}}" class="nav-link">
+                  <a href="{{route('penilai.penilai.lihatjabatan')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Tabel Jabatan Fungsional</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                <a href="{{route('dosen.dosen.lihatkomponenkegiatan')}}" class="nav-link">
+                <a href="{{route('penilai.penilai.lihatkomponenkegiatan')}}" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Tabel Komponen Kegiatan</p>
                     </a>
@@ -135,13 +135,13 @@
 
     @yield('content')
 
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.0.3-pre
-    </div>
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-    reserved.
-  </footer>
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+          <b>Version</b> 1.0
+        </div>
+        <strong>Copyright &copy; Jenjang Karir Dosen 2020 </strong> All rights
+        reserved.
+      </footer>
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">

@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Penilai;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\jabatan;
 use App\pengajuanak;
+use App\komponenkegiatan;
+use DB;
 class ApprovalController extends Controller
 {
     /**
@@ -13,9 +15,28 @@ class ApprovalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function lihat_kk()
+    {
+        $komponenkegiatanData= komponenkegiatan::all();
+        return view('penilai.lihat_komponenkegiatan',compact('komponenkegiatanData'));
+    }
+    public function lihat_jabatan()
+    {
+        $jabatanData= jabatan::all();
+        return view('penilai.lihat_jabatan',compact('jabatanData'));
+    }
+    public function detail($id)
+    {
+        $pengajuanData = pengajuanak::where('dosen_id',$id)->get();
+        return view('penilai.detail_approval',compact('pengajuanData'));
+    }
     public function index()
     {
-        $pengajuanData = pengajuanak::where('status','=','0')->get();
+        // $pengajuanData = Db::table('pengajuanaks')->select('id','dosen_id')->groupBy('id','dosen_id')->orderBy('created_at')->get();
+        $pengajuanData = Db::table('pengajuanaks')->join('dosens','pengajuanaks.dosen_id','=','dosens.nip')
+        ->select('pengajuanaks.id','pengajuanaks.dosen_id','dosens.nama_dosen')
+        ->groupby('dosen_id')->orderby('pengajuanaks.created_at','asc')->get();
+
         return view('penilai.approval',compact('pengajuanData'));
     }
 
@@ -76,7 +97,7 @@ class ApprovalController extends Controller
         $dosenData->note = $request->note;
         $dosenData->status = $request->status;
         $dosenData->save();
-        return redirect()->route('penilai.approval.index')->with('alert-success','data berhasil diubah.');
+        return redirect()->route('penilai.approval.index')->with('alert-success','Data berhasil di verifikasi dan akan di lanjutkan ke dosen bersangkutan.');
     }
 
     /**

@@ -16,7 +16,7 @@ class KriteriaController extends Controller
     public function index()
     {
         $kriteriaData= kriteria::all();
-        return view('admin.ahp.kriteria.kriteria_crd',compact('kriteriaData'));
+        return view('admin.kriteria.kriteria_read',compact('kriteriaData'));
     }
 
     /**
@@ -38,11 +38,11 @@ class KriteriaController extends Controller
     public function store(Request $request)
     {
         //
-        $kriteriaData = new kriteria();
-        $kriteriaData->nama_kriteria = $request->nama_kriteria;
-        $kriteriaData->bobot = $request->bobot;
-        $kriteriaData->save();
-        return redirect()->route('admin.kriteria.index')->with('alert-success','Data berhasil ditambahkan !');
+        // $kriteriaData = new kriteria();
+        // $kriteriaData->nama_kriteria = $request->nama_kriteria;
+        // $kriteriaData->bobot = $request->bobot;
+        // $kriteriaData->save();
+        // return redirect()->route('admin.kriteria.index')->with('alert-success','Data berhasil ditambahkan !');
     }
 
     /**
@@ -66,7 +66,7 @@ class KriteriaController extends Controller
     {
         //
         $kriteriaData = kriteria::where('id',$id)->get();
-        return view('admin.ahp.kriteria.kriteria_edit',compact('kriteriaData'));
+        return view('admin.kriteria.kriteria_edit',compact('kriteriaData'));
     }
 
     /**
@@ -80,10 +80,9 @@ class KriteriaController extends Controller
     {
         //
         $kriteriaData = kriteria::where('id',$id)->first();
-        $kriteriaData->nama_kriteria = $request->nama_kriteria;
-        $kriteriaData->bobot = $request->bobot;
+        $kriteriaData->nilai = $request->nilai;
         $kriteriaData->save();
-        return redirect()->route('admin.kriteria.index')->with('alert-success','data berhasil diubah.');
+        return redirect()->route('admin.kriteria.index')->with('success','data berhasil diubah.');
     }
 
     /**
@@ -95,8 +94,8 @@ class KriteriaController extends Controller
     public function destroy($id)
     {
         //
-        $kriteriaData =kriteria::where('id',$id)->first();
-        $kriteriaData->delete();
-        return redirect()->route('admin.kriteria.index')->with('alert-success','Data berhasil dihapus.');
+        // $kriteriaData =kriteria::where('id',$id)->first();
+        // $kriteriaData->delete();
+        // return redirect()->route('admin.kriteria.index')->with('alert-success','Data berhasil dihapus.');
     }
 }

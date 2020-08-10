@@ -39,6 +39,15 @@ class JabatanController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama_jabatan' => 'max:250',
+            'kum' => 'numeric'
+
+        ],
+    [
+        'nama_jabatan.max' => 'Maximal Huruf adalah 250',
+        'kum.numeric' => 'Point Kum Hanya boleh angka',
+    ]);
         $jabatanData = new jabatan();
         $jabatanData->nama_jabatan = $request->nama_jabatan;
         $jabatanData->kum = $request->kum;
@@ -79,6 +88,15 @@ class JabatanController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nama_jabatan' => 'max:250',
+            'kum' => 'numeric'
+
+        ],
+    [
+        'nama_jabatan.max' => 'Maximal Huruf adalah 250',
+        'kum.numeric' => 'Point Kum Hanya boleh angka',
+    ]);
         // update data yang telah di dapat dari fungsi edit diatas
         $jabatanData = jabatan::where('id',$id)->first();
         $jabatanData->nama_jabatan = $request->nama_jabatan;

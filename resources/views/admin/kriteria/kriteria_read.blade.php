@@ -11,7 +11,11 @@
 @endsection
 
 @section('content')
-
+            @if(Session::has('alert-success'))
+                <div class="alert alert-success">
+                    <strong>{{ \Illuminate\Support\Facades\Session::get('alert-success') }}</strong>
+                </div>
+            @endif
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -19,7 +23,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Jabatan</h1>
+            <h1>Kriteria</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -35,57 +39,39 @@
  <section class="content">
     <div class="row">
       <div class="col-12">
-        @if(\Session::has('alert'))
-        <div class="alert alert-danger" aria-label="close">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>>
-            <div>{{Session::get('alert')}}</div>
-        </div>
-        @endif
-        @if(\Session::has('alert-success'))
-        <div class="alert alert-success" aria-label="close">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <div>{{Session::get('alert-success')}}</div>
-        </div>
-        @endif
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Jabatan & Kum Settings</h3>
-            <div class="card-tools">
+            <h3 class="card-title">Bobot Kriteria Settings</h3>
+            {{-- <div class="card-tools">
                 <button type="button" class="btn btn-tool"  data-toggle="modal" data-target="#modal-create">
                   <i class="fas fa-plus"></i></button>
-            </div>
+            </div> --}}
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <table id="table_jabatan" class="table table-bordered table-hover">
+            <table id="example1" class="table table-bordered table-hover">
               <thead>
               <tr>
                 <th>No</th>
-                <th>Nama Jabatan</th>
-                <th>Jumlah Kum</th>
+                <th>Jabatan</th>
+                <th>Nama Kriteria</th>
+                <th>Bobot</th>
                 <th>Actions</th>
               </tr>
               </thead>
               <tbody>
                   <?php $no=1; ?>
-                  @foreach ($jabatanData as $jabatan)
+                  @foreach ($kriteriaData as $kriteria)
 
-              <tr class="jabatan{{$jabatan->id}}">
+              <tr>
               <td>{{ $no++ }}</td>
-              <td>{{$jabatan->nama_jabatan}}</td>
-              <td>{{$jabatan->kum}}</td>
+              <td>{{$kriteria->getjabatan->nama_jabatan}}</td>
+              <td>{{$kriteria->getjeniskegiatan->nama_jk}}</td>
+              <td>{{$kriteria->nilai}}</td>
                 <td>
-
-                    <form action="{{ route('admin.jabatan.destroy', $jabatan->id) }}" method="post">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-                <a href="{{ route('admin.jabatan.edit',$jabatan->id)}}" class="btn btn-warning show-modal" data-id="{{$jabatan->id}}" data-nama="{{$jabatan->nama_jabatan}}" data-kum="{{$jabatan->kum}}" >
+                <a href="{{ route('admin.kriteria.edit',$kriteria->id)}}" class="btn btn-warning show-modal" >
                         Edit
                 </a>
-                    <button type="submit" data-id="{{$jabatan->id}}" data-nama="{{$jabatan->nama_jabatan}}" data-kum="{{$jabatan->kum}}" class="btn btn-danger" >
-                        Delete
-                    </button>
-                    </form>
                 </td>
               </tr>
                   @endforeach
@@ -102,39 +88,6 @@
 </section>
 <!-- /.content -->
 </div>
-<div class="modal fade" id="modal-create">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Add Data</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-    <form action="{{route('admin.jabatan.store')}}" method="POST">
-            {{ csrf_field() }}
-        <div class="modal-body">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Nama Jabatan</label>
-            <input type="text" class="form-control" id="nama_jabatan" name="nama_jabatan" placeholder="Nama Jabatan">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Point KUM</label>
-            <input type="text" class="form-control" id="kum" name="kum" placeholder="Point Kum">
-        </div>
-        </div>
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save</button>
-        </div>
-        </form>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
-  <!-- /.modal -->
-
         {{-- <div class="modal fade" id="modal-update">
             <div class="modal-dialog">
               <div class="modal-content">
